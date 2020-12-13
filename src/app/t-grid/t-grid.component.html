@@ -1,0 +1,57 @@
+<table>
+    <thead>
+        <tr>
+            <th
+                *ngFor="let col of columnList"
+                (click)="sortClicked(col.property)"
+            >
+                {{col.label}}
+                {{
+                sortChange.value?.columnName === col.property && sortChange.value?.direction === 'ASC'
+                ? '&#8593;' : ''
+                }}
+                {{
+                sortChange.value?.columnName === col.property && sortChange.value?.direction === 'DESC'
+                ? '&#8595;' : ''
+                }}
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngIf="visibleGrid$ | async as dataGrid">
+        <tr *ngFor="let row of dataGrid">
+            <td *ngFor="let col of columnList">
+                {{row[col.property]}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<ng-container *ngIf="pageSize$.value as pageSize">
+    <ng-container *ngIf="pageSize !== null">
+        <div *ngIf="onChange.value?.currentPage || 1  as currentPage">
+            <button
+                [disabled]="currentPage  < 2"
+                (click)="onChange.next({
+                currentPage: currentPage - 1,
+                pageSize: pageSize
+            })"
+            >
+                prev
+            </button>
+            <button
+                [disabled]="currentPage >= (dataGrid$.value.length / pageSize) "
+                (click)="onChange.next({
+                currentPage: currentPage + 1,
+                pageSize: pageSize
+            })"
+            >
+                next
+            </button>
+        </div>
+    </ng-container>
+</ng-container>
+<!-- <pre>
+    columnList: {{columnList | json}}
+    pageSize: {{pageSize}} 
+    dataGrid$.value.length: {{dataGrid$.value.length}}
+    onChange.value: {{onChange.value | json}}
+</pre> -->

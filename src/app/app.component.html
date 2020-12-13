@@ -1,0 +1,68 @@
+<h1> Costica Puntaru - homework</h1>
+<div class="container">
+  <section>
+    <h2>
+      Data grid
+    </h2>
+    <form>
+      <label>
+        pageSize:
+
+        <input
+          type="number"
+          name="pageSize"
+          [(ngModel)]="pageSize"
+        >
+      </label>
+
+    </form>
+
+
+    <t-grid
+      [data]="dataArr"
+      [pageSize]="pageSize"
+      (onChange)="changes('pagination', $event)"
+      (sortChange)="changes('sortChange', $event)"
+    >
+      <t-column
+        name="First name"
+        property="firstName"
+        [sortable]="true"
+      ></t-column>
+      <t-column
+        name="Last name"
+        property="lastName"
+        [sortable]="true"
+      ></t-column>
+    </t-grid>
+
+    <pre>
+      changeList: {{changeList | json}}
+    </pre>
+
+
+
+
+  </section>
+  <section>
+    <h2>Progress circle</h2>
+    <form ngForm>
+      <label>
+        Progress:
+        <input
+          type="range"
+          min="0"
+          max="100"
+          name="progress"
+          [(ngModel)]="progress"
+        >({{progress}})
+      </label>
+    </form>
+    <t-progress
+      [progress]="progress"
+      (complete)="completed = true"
+    >
+    </t-progress>
+    <div>completed: {{completed}}</div>
+  </section>
+</div>

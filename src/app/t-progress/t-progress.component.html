@@ -1,0 +1,30 @@
+<svg
+  id="svg"
+  [attr.width]="(radius + stroke) * 2"
+  [attr.height]="(radius + stroke) * 2"
+  viewPort="0 0 100 100"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    [attr.r]="radius"
+    [attr.cx]="(radius + stroke)"
+    [attr.cy]="(radius + stroke)"
+    fill="transparent"
+    [style.stroke-dasharray]="circumference  + ' ' + circumference"
+    [style.strokeWidth]="stroke + 'px'"
+    stroke-dashoffset="0"
+  ></circle>
+
+  <circle
+    id="bar"
+    [attr.r]="radius"
+    [attr.cx]="(radius + stroke)"
+    [attr.cy]="(radius + stroke)"
+    fill="transparent"
+    [style.strokeWidth]="stroke + 'px'"
+    [style.stroke-dasharray]="circumference  + ' ' + circumference"
+    [style.stroke-dashoffset]="(circumference - progress / 100 * circumference)"
+  >
+  </circle>
+</svg>
