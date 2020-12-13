@@ -91,10 +91,13 @@ export class TGridComponent<T> implements OnInit {
 
   public columnList: Column<T>[] = []
 
-  public sortClicked(property: keyof T) {
+  public sortClicked(col: Column<T>) {
+    if (!this.sortable || !col.sortable) {
+      return
+    }
     this.sortChange.next({
-      columnName: property,
-      direction: this.sortChange.value?.columnName === property && this.sortChange.value.direction === 'ASC' ? 'DESC' : 'ASC'
+      columnName: col.property,
+      direction: this.sortChange.value?.columnName === col.property && this.sortChange.value.direction === 'ASC' ? 'DESC' : 'ASC'
     })
   }
 

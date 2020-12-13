@@ -20,6 +20,7 @@
 
     <t-grid
       [data]="dataArr"
+      [sortable]="true"
       [pageSize]="pageSize"
       (onChange)="changes('pagination', $event)"
       (sortChange)="changes('sortChange', $event)"

@@ -3,17 +3,12 @@
         <tr>
             <th
                 *ngFor="let col of columnList"
-                (click)="sortClicked(col.property)"
+                (click)="sortClicked(col)"
             >
                 {{col.label}}
-                {{
-                sortChange.value?.columnName === col.property && sortChange.value?.direction === 'ASC'
-                ? '&#8593;' : ''
-                }}
-                {{
-                sortChange.value?.columnName === col.property && sortChange.value?.direction === 'DESC'
-                ? '&#8595;' : ''
-                }}
+                <ng-container *ngIf="sortChange.value?.columnName === col.property">
+                    {{ sortChange.value?.direction === 'DESC' ? '&#8595;' : '&#8593;'}}
+                </ng-container>
             </th>
         </tr>
     </thead>
